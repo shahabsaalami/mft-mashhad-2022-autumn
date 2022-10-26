@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,9 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val diceRollButton: Button = findViewById(R.id.buttonDice)
-
         diceRollButton.setOnClickListener { rollDice() }
-
 
     }
 
@@ -28,8 +27,12 @@ class MainActivity : AppCompatActivity() {
         txtResultView.text = rollResult.toString()
 
 
+
         when (rollResult) {
-            6 -> Toast.makeText(this, "برنده شدی", Toast.LENGTH_LONG).show()
+            6 -> {
+                Toast.makeText(this, "برنده شدی", Toast.LENGTH_LONG).show()
+                openWinnerActivity()
+            }
             5 -> Toast.makeText(this, "نزدیک بود ولی برنده نشدی!", Toast.LENGTH_SHORT).show()
             4 -> Toast.makeText(this, "تو می‌تونی موفق بشی، دوباره تلاش کن", Toast.LENGTH_SHORT)
                 .show()
@@ -50,5 +53,10 @@ class MainActivity : AppCompatActivity() {
             6 -> imgRollDice.setImageResource(R.drawable.dice_6)
         }
 
+    }
+
+    private fun openWinnerActivity() {
+        val intent = Intent(this, WinnerActivity::class.java)
+        startActivity(intent)
     }
 }
