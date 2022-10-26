@@ -10,10 +10,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val slices = 6
-        val random = Random()
-        val randomNumber = random.nextInt(slices) + 1
-        Log.w("MainActivity", " Random Number = ${randomNumber}")
+        val dice = Dice(6)
+        val randomNumber = dice.roll()
+        Log.w("MainActivity", "Your ${dice.slices} sided dice rolled  ${randomNumber}!")
 
 
     }
