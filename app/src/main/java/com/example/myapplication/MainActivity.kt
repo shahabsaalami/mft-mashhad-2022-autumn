@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -15,10 +16,13 @@ class MainActivity : AppCompatActivity() {
 
 
         val diceRollButton: Button = findViewById(R.id.buttonDice)
+        val txtResultView : TextView = findViewById(R.id.txtResultView)
+
         diceRollButton.setOnClickListener {
             val rollResult = dice.roll()
 
             Log.w("MainActivity", "Your ${dice.slices} sided dice rolled  ${rollResult}!")
+            txtResultView.text = rollResult.toString()
 
             when(rollResult){
                 6->Toast.makeText(this, "برنده شدی", Toast.LENGTH_LONG).show()
