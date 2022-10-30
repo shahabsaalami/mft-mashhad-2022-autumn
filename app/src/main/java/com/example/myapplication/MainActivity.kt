@@ -11,29 +11,5 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val squareCabin = SquareCabin(6)
-        with(squareCabin) {
-            println("\nSquare Cabin \n =================")
-            println("Capacity=${capacity}")
-            println("buildingMaterial=${buildingMaterial}")
-            println("HasRoom?=${hasRoom()}")
-        }
-        val roundCabin = RoundCabin(5)
-        with(roundCabin) {
-            println("\nroundCabin Cabin \n =================")
-            println("Capacity=${capacity}")
-            println("buildingMaterial=${buildingMaterial}")
-            println("HasRoom?=${hasRoom()}")
-        }
-        val roundTower = RoundTower(4, floors= 2)
-        with(roundTower) {
-            println("\nRound Tower\n==========")
-            println("Material: $buildingMaterial")
-            println("floors: $floors")
-            println("Capacity: $capacity")
-            println("Has room? ${hasRoom()}")
-        }
-
-
     }
 }
