@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         val birthdayInYear: Int = 1350
         var currentYear = 1401
 
-        val age = currentYear - birthdayInYear
+        var age = currentYear - birthdayInYear
 
         println("$name has $age years old")
 
