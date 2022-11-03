@@ -8,13 +8,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        main()
 
-//        first()
-//        second()
+    }
 
-//        val triple: (Int) -> Int = { a: Int -> a * 3 }
-        val triple: (Int) -> Int = { it * 3  }
-        println(triple(5))
+    fun main() {
+        val words = listOf(
+            "about",
+            "acute",
+            "awesome",
+            "balloon",
+            "best",
+            "Brief",
+            "class",
+            "coffee",
+            "creative"
+        )
+        val filteredWords = words.filter { it.startsWith("b", ignoreCase = true) }
+            .shuffled()
+            .take(1)
+
+        println(filteredWords)
+
     }
 
     private fun second() {
