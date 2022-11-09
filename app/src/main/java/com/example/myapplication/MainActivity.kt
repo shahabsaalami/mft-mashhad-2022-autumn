@@ -1,6 +1,9 @@
 package com.example.myapplication
 
+import android.content.res.Resources.Theme
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +15,16 @@ import com.example.myapplication.adapter.LetterAdapter
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val TAG = "MainActivity"
+    }
+
     private var isLinearLayoutManager = true
     private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d(TAG, "onCreate: Called")
         recyclerView = findViewById(R.id.recyclerView)
 
         // Generates a [CharRange] from 'A' to 'Z' and converts it to a list
@@ -135,4 +143,53 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop Called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart Called")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart: Called")
+    }
+
+    override fun onRestoreInstanceState(
+        savedInstanceState: Bundle?,
+        persistentState: PersistableBundle?
+    ) {
+        super.onRestoreInstanceState(savedInstanceState, persistentState)
+        Log.i(TAG, "onRestoreInstanceState: Called")
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("Key", "IT IS A VALUE")
+        super.onSaveInstanceState(outState)
+        Log.i(TAG, "onSaveInstanceState: Called")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Log.i(TAG, "onRestoreInstanceState: Called ${savedInstanceState.get("Key")}")
+    }
 }
