@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.DetailActivity
-import com.example.myapplication.DetailActivity.Companion.LETTER
+
 import com.example.myapplication.R
+import com.example.myapplication.fragment.LetterListFragmentDirections
 
 class LetterAdapter(val list: List<Char>) :
     RecyclerView.Adapter<LetterAdapter.LetterViewHolder>() {
@@ -47,16 +48,9 @@ class LetterAdapter(val list: List<Char>) :
 
         // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
         holder.button.setOnClickListener {
-            val context = holder.itemView.context
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(LETTER, holder.button.text.toString())
-            context.startActivity(intent)
-
-            // Create an action from WordList to DetailList
-            // using the required arguments
-//            val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(letter = holder.button.text.toString())
-            // Navigate using that action
-//            holder.view.findNavController().navigate(action)
+            val action =
+                LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(holder.button.text.toString())
+            holder.view.findNavController().navigate(action)
         }
     }
 }

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.DetailActivity
 import com.example.myapplication.R
 
 /**
@@ -32,7 +31,7 @@ class WordAdapter(private val letterId: String, context: Context) :
             // Returns a collection that it has shuffled in place
             .shuffled()
             // Returns the first n items as a [List]
-            .take(5)
+//            .take(5)
             // Returns a sorted version of that [List]
             .sorted()
     }
@@ -69,9 +68,9 @@ class WordAdapter(private val letterId: String, context: Context) :
 
         // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
         holder.button.setOnClickListener {
-            val queryUrl :Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}$item+definition")
-            val intent = Intent (Intent.ACTION_VIEW,queryUrl)
-            context.startActivity(intent)
+//            val queryUrl :Uri = Uri.parse("${DetailActivity.SEARCH_PREFIX}$item+definition")
+//            val intent = Intent (Intent.ACTION_VIEW,queryUrl)
+//            context.startActivity(intent)
         }
     }
 
