@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
@@ -14,17 +15,7 @@
   ~ limitations under the License.
   -->
 
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-  <group android:scaleX="1.1567867"
-      android:scaleY="1.1567867"
-      android:translateX="-8.64"
-      android:translateY="-8.64">
-    <path
-        android:pathData="M26.04,0L82.26,0A26.04,26.04 0,0 1,108.3 26.04L108.3,82.26A26.04,26.04 0,0 1,82.26 108.3L26.04,108.3A26.04,26.04 0,0 1,0 82.26L0,26.04A26.04,26.04 0,0 1,26.04 0z"
-        android:fillColor="#3f51b5"/>
-  </group>
-</vector>
+<resources>
+    <dimen name="default_padding">16dp</dimen>
+    <dimen name="default_margin">32dp</dimen>
+</resources>
