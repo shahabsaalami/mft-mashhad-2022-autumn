@@ -21,14 +21,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//         threadLearning()
+         threadLearning()
 //        coroutines()
 //        runBlock()
-        coroutineLearing()
+//        coroutineLearning()
 
     }
 
-    private fun coroutineLearing() {
+    private fun coroutineLearning() {
         val states = arrayOf("Starting", "Doing Task 1", "Doing Task 2", "Ending")
 
         repeat(3){
