@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -21,20 +20,29 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-         threadLearning()
+        main()
+//         threadLearning()
 //        coroutines()
 //        runBlock()
 //        coroutineLearning()
 
     }
 
+    private fun main() {
+        val thread = Thread {
+            Log.i(TAG, "${Thread.currentThread()} has run")
+        }
+        thread.start()
+    }
+
+ 
     private fun coroutineLearning() {
         val states = arrayOf("Starting", "Doing Task 1", "Doing Task 2", "Ending")
 
-        repeat(3){
+        repeat(3) {
             GlobalScope.launch {
                 Log.i(TAG, "${Thread.currentThread()} has started")
-                for (i in states){
+                for (i in states) {
                     Log.d(TAG, "${Thread.currentThread()} - $i")
                     Thread.sleep(50)
                 }
@@ -47,10 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         runBlocking {
             Log.d(TAG, "runBlock: 1")
-            val num1 = async {  getValue()}
-            val num2 =async { getValue() }
+            val num1 = async { getValue() }
+            val num2 = async { getValue() }
             Log.d(TAG, "runBlock: 2")
-            Log.w(TAG, "3 result of num1 + num2 is ${num1.await() + num2.await()}", )
+            Log.w(TAG, "3 result of num1 + num2 is ${num1.await() + num2.await()}")
             Log.i(TAG, "4 runBlock: ")
         }
     }
@@ -95,12 +103,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     val formatter: DateTimeFormatter = DateTimeFormatter.ISO_LOCAL_TIME
-    val time = {formatter.format(LocalDateTime.now())}
+    val time = { formatter.format(LocalDateTime.now()) }
 
     suspend fun getValue(): Double {
         Log.i(TAG, "entering getValue at ${time()} ")
         delay(3000)
-        Log.i(TAG,"leaving getValue() at ${time()}")
+        Log.i(TAG, "leaving getValue() at ${time()}")
         return Math.random()
     }
 }

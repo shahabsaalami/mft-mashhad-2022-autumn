@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_word_layout" />
+        android:gravity="center"
+        android:text="Hello Coroutines"
+        android:textSize="22dp" />
 </LinearLayout>
