@@ -1,7 +1,22 @@
 <resources>
-    <string name="app_name">Bus Schedule</string>
-    <!-- Shown above left column listing bus stops in full schedule fragment -->
-    <string name="bus_stop_header">Stop Name</string>
-    <!-- Shown above right column listing arrival times in full schedule fragment -->
-    <string name="arrival_time_header">Arrival Time</string>
+    <string name="app_name">فهرست انبار</string>
+    <string name="sell">فروش</string>
+    <string name="quantity">مقدار موجودی:</string>
+    <string name="quantity_req">مقدار موجودی <font color='#FF0000'>*</font></string>
+    <string name="item_name_req">نام کالا <font color='#FF0000'>*</font></string>
+    <string name="item_price_req">قیمت کالا <font color='#FF0000'>*</font></string>
+    <string name="save_action">ذخیره</string>
+    <string name="item_detail_fragment_title">جزییات کالا</string>
+    <string name="add_fragment_title">افزودن کالا</string>
+    <string name="edit_fragment_title">ویرایش کالا</string>
+    <string name="price">قیمت</string>
+    <string name="quantity_in_stock">موجودی \n در انبار</string>
+    <string name="item">کالا</string>
+    <string name="delete">حذف</string>
+    <string name="delete_question">آیا مطعن به حذف کالا هستید</string>
+    <string name="no">نه</string>
+    <string name="yes">بلی</string>
+    <string name="currency_symbol">ریال</string>
+    <string name="edit_item">ویرایش کالا</string>
+    <string name="add_new_item">افزودن کالا جدید</string>
 </resources>
