@@ -1,5 +1,6 @@
 package com.example.myapplication.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.myapplication.data.Item
 import com.example.myapplication.data.ItemDao
@@ -60,11 +61,34 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         viewModelScope.launch {
             itemDao.delete(item)
         }
-
     }
 
     fun isStockAvailable(item: Item): Boolean = item.quantityInStock > 0
 
+
+    private fun getUpdatedItemEntry(
+        itemId: Int,
+        itemName: String,
+        itemPrice: String,
+        itemCount: String
+    ): Item {
+        Log.i("TAG", "getUpdatedItemEntry: $itemPrice")
+        return Item(
+            id = itemId,
+            itemName = itemName,
+            itemPrice = itemPrice.toDouble(),
+            quantityInStock = itemCount.toInt()
+        )
+    }
+    fun updateItem(
+        itemId: Int,
+        itemName: String,
+        itemPrice: String,
+        itemCount: String
+    ) {
+        val updatedItem = getUpdatedItemEntry(itemId, itemName, itemPrice, itemCount)
+        updateItem(updatedItem)
+    }
     /**
      * Factory class to instantiate the [ViewModel] instance.
      */

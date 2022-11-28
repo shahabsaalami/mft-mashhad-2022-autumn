@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.data.Item
 import com.example.myapplication.databinding.FragmentAddItemBinding
 import com.example.myapplication.viewmodel.InventoryViewModel
 
@@ -29,6 +31,7 @@ class AddItemFragment : Fragment() {
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModel.InventoryViewModelFactory((activity?.application as InventoryApplication).database.itemDao())
     }
+    lateinit var item: Item
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,12 +39,23 @@ class AddItemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddItemBinding.inflate(inflater, container, false)
-        binding.saveAction.setOnClickListener {
-            addNewItem()
-        }
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val id = navigationArgs.itemId
+        if (id > 0) {
+            viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
+                item = selectedItem
+                bind(item)
+            }
+        } else {
+            binding.saveAction.setOnClickListener {
+                addNewItem()
+            }
+        }
+    }
     private fun isEntryValid(): Boolean {
         return viewModel.isEntryValid(
             binding.itemName.text.toString(),
@@ -72,5 +86,27 @@ class AddItemFragment : Fragment() {
                 InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(requireActivity().currentFocus?.windowToken, 0)
         _binding = null
+    }
+
+    private fun updateItem() {
+        if (isEntryValid()) {
+            viewModel.updateItem(
+                this.navigationArgs.itemId,
+                this.binding.itemName.text.toString(),
+                this.binding.itemPrice.text.toString(),
+                this.binding.itemCount.text.toString()
+            )
+            val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
+            findNavController().navigate(action)
+        }
+    }
+    private fun bind(item: Item) {
+         binding.apply {
+            itemName.setText(item.itemName, TextView.BufferType.SPANNABLE)
+            itemPrice.setText(item.itemPrice.toString(), TextView.BufferType.SPANNABLE)
+            itemCount.setText(item.quantityInStock.toString(), TextView.BufferType.SPANNABLE)
+            saveAction.setOnClickListener { updateItem() }
+
+        }
     }
 }
