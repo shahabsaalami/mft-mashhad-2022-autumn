@@ -10,7 +10,7 @@
     <string name="add_fragment_title">افزودن کالا</string>
     <string name="edit_fragment_title">ویرایش کالا</string>
     <string name="price">قیمت</string>
-    <string name="quantity_in_stock">موجودی \n در انبار</string>
+    <string name="quantity_in_stock">موجودی</string>
     <string name="item">کالا</string>
     <string name="delete">حذف</string>
     <string name="delete_question">آیا مطعن به حذف کالا هستید</string>
