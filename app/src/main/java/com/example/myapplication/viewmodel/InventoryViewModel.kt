@@ -55,7 +55,15 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
 
     }
-    fun isStockAvailable(item: Item) :Boolean = item.quantityInStock > 0
+
+    fun deleteItem(item: Item) {
+        viewModelScope.launch {
+            itemDao.delete(item)
+        }
+
+    }
+
+    fun isStockAvailable(item: Item): Boolean = item.quantityInStock > 0
 
     /**
      * Factory class to instantiate the [ViewModel] instance.
