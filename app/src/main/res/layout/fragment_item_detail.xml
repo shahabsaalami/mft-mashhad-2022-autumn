@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/margin"
+    android:layoutDirection="rtl"
     tools:context=".ItemDetailFragment">
 
     <TextView
@@ -14,16 +14,17 @@
         android:layout_width="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Screwdrivers" />
+        tools:text="شیر بستنی" />
 
     <TextView
         android:id="@+id/item_price"
         style="@style/Widget.Inventory.TextView"
         android:layout_width="wrap_content"
         android:layout_marginTop="@dimen/margin"
+        android:textFontWeight="800"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_name"
-        tools:text="$5.50" />
+        tools:text="500,000 ریال" />
 
     <TextView
         android:id="@+id/item_count_label"
@@ -74,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_between_elements"
         android:layout_marginBottom="@dimen/margin_between_elements"
+        android:backgroundTint="@color/deep_orange_500"
         android:contentDescription="@string/edit_item"
         android:src="@drawable/ic_edit"
         app:layout_constraintBottom_toBottomOf="parent"

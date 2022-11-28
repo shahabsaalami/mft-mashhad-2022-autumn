@@ -1,15 +1,19 @@
-
 package com.example.myapplication
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.data.Item
+import com.example.myapplication.data.getFormattedPrice
 import com.example.myapplication.databinding.FragmentItemDetailBinding
+import com.example.myapplication.viewmodel.InventoryViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
@@ -20,6 +24,12 @@ class ItemDetailFragment : Fragment() {
 
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: InventoryViewModel by activityViewModels {
+        InventoryViewModel.InventoryViewModelFactory(
+            (activity?.application as InventoryApplication).database.itemDao()
+        )
+    }
+    lateinit var item: Item
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +37,26 @@ class ItemDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
+        val id = navigationArgs.itemId
+        viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
+            item = selectedItem
+            bind(item)
+            Log.i("TAG", "onCreateView: ")
+        }
         return binding.root
+    }
+
+    private fun bind(item: Item) {
+        binding.apply {
+            itemName.text = item.itemName
+            itemPrice.text = item.getFormattedPrice()
+            itemCount.text = item.quantityInStock.toString()
+            sellItem.isEnabled = viewModel.isStockAvailable(item)
+            sellItem.setOnClickListener {
+                viewModel.sellItem(item)
+            }
+        }
+
     }
 
     /**

@@ -27,6 +27,7 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
 
     }
+
     /**
      * Returns true if the EditTexts are not empty
      */
@@ -36,6 +37,25 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
         }
         return true
     }
+
+    fun retrieveItem(id: Int): LiveData<Item> {
+        return itemDao.getItem(id).asLiveData()
+    }
+
+    private fun updateItem(item: Item) {
+        viewModelScope.launch {
+            itemDao.update(item)
+        }
+    }
+
+    fun sellItem(item: Item) {
+        if (item.quantityInStock > 0) {
+            val newItem = item.copy(quantityInStock = item.quantityInStock - 1)
+            updateItem(newItem)
+        }
+
+    }
+    fun isStockAvailable(item: Item) :Boolean = item.quantityInStock > 0
 
     /**
      * Factory class to instantiate the [ViewModel] instance.
