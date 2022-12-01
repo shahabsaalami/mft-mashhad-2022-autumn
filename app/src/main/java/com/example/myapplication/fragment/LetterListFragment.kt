@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.adapter.LetterAdapter
+import com.example.myapplication.data.SettingsDataStore
 import com.example.myapplication.databinding.FragmentLetterListBinding
+import kotlinx.coroutines.launch
 
 
 class LetterListFragment : Fragment() {
@@ -19,6 +23,7 @@ class LetterListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var isLinearLayoutManager = true
 
+    private lateinit var SettingsDataStore: SettingsDataStore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +35,19 @@ class LetterListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        SettingsDataStore = SettingsDataStore(requireContext())
+
         _binding = FragmentLetterListBinding.inflate(inflater, container, false)
         val view = binding.root
         recyclerView = binding.recyclerView
-        chooseLayout()
+        SettingsDataStore.preferenceFlow.asLiveData().observe(
+            viewLifecycleOwner
+        ) {
+            isLinearLayoutManager = it
+            chooseLayout()
+            activity?.invalidateOptionsMenu()
+
+        }
         return view
     }
 
@@ -52,8 +66,12 @@ class LetterListFragment : Fragment() {
         return when (item.itemId) {
             R.id.action_switch_layout -> {
                 isLinearLayoutManager = !isLinearLayoutManager
-                chooseLayout()
-                setIcon(item)
+
+                lifecycleScope.launch{
+                    SettingsDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager,requireContext())
+                }
+//                chooseLayout()
+//                setIcon(item)
 
                 return true
             }
